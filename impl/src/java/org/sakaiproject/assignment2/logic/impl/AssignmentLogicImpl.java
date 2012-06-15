@@ -481,15 +481,6 @@ public class AssignmentLogicImpl implements AssignmentLogic{
                 }
             }
                         
-            if (assignment.getGradebookPointsPossible() != null && // this needs to be checked because if this is called
-                                                           // by updateEntity() during an JS inline title rename
-                                                           // PointsPossible will be null 
-                    gbItem.getPointsPossible() != assignment.getGradebookPointsPossibleDouble()) {
-                
-                gbItem.setPointsPossible(assignment.getGradebookPointsPossibleDouble());
-                updateGradebook = true;
-            }
-            
             if (! gbItem.getTitle().equals(assignment.getTitle())) {
                 gbItem.setTitle(assignment.getTitle());
                 updateGradebook = true;
