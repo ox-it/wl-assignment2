@@ -32,19 +32,21 @@
         <sakai.message.group>org.sakaiproject</sakai.message.group>
         <sakai.assignment.group>org.sakaiproject</sakai.assignment.group>
     </properties>
-    
+
     <scm>
-        <connection>scm:svn:https://source.sakaiproject.org/contrib/assignment2/trunk/</connection>
-        <developerConnection>scm:svn:https://source.sakaiproject.org/contrib/assignment2/trunk/</developerConnection>
-        <url>https://source.sakaiproject.org/contrib/assignment2/trunk/</url>
+        <connection>scm:git:git://git-repo.oucs.ox.ac.uk/git/repos/local-version/assignment2.git</connection>
+        <developerConnection>scm:git:ssh://git-repo.oucs.ox.ac.uk/~git/repos/local-version/assignment2.git</developerConnection>
     </scm>
-    
+
     <distributionManagement>
-        <site>
-            <id>sakai-site</id>
-            <name>Sakai release Site</name>
-            <url>scpexe://source.sakaiproject.org/var/www/html/release/assignment2/${project.version}</url>
-        </site>
+        <repository>
+            <id>maven-repo.oucs</id>
+            <url>https://maven-repo.oucs.ox.ac.uk/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>maven-repo.oucs</id>
+            <url>https://maven-repo.oucs.ox.ac.uk/content/repositories/snapshots</url>
+        </snapshotRepository>
     </distributionManagement>
     
     <pluginRepositories>
