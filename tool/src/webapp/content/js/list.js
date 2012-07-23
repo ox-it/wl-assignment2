@@ -129,7 +129,7 @@ asnn2.buildListRenderTreeFromData = function (obj, index) {
   if (obj.graded === true && canGrade) {
       togo.gradelink = {
           target: '/portal/tool/'+sakai.curPlacement+'/viewSubmissions/'+obj.id,
-          linktext: "Grade"
+          linktext: "Mark"
       };
       if (canDetails || canEdit || canAdd || canEditMatrix) {
         togo.sep3 = true;
