@@ -293,6 +293,7 @@ public class AssignmentAuthoringBean {
             } catch (ContentReviewException cre) {
                 messages.addMessage(new TargettedMessage("assignment2.turnitin.error.unable_to_save_tii",
                         new Object[] { assignment.getTitle() }, TargettedMessage.SEVERITY_ERROR));
+                LOG.warn("Couldn't save the TurnItIn settings", cre);
             } catch (ConflictingAssignmentNameInGradebookException canige) {
                 assignment.setTitle(this.externalGradebookLogic.getFreeAssignmentName(assignment.getContextId(), assignment.getTitle()));
                 
