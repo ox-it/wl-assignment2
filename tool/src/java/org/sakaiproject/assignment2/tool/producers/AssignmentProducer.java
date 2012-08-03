@@ -282,6 +282,8 @@ public class AssignmentProducer implements ViewComponentProducer, ViewParamsRepo
         cal.add(Calendar.DAY_OF_YEAR, 7);
         cal.set(Calendar.HOUR_OF_DAY, 17);
         Date defaultCloseDate = assignment.getDueDate() != null ? assignment.getDueDate() : cal.getTime();
+        cal.add(Calendar.DAY_OF_YEAR, 1);
+        Date defaultAcceptUntilDate = assignment.getAcceptUntilDate() != null ? assignment.getAcceptUntilDate() : cal.getTime();
 
         //set dateEvolver
         dateEvolver.setStyle(FormatAwareDateInputEvolver.DATE_TIME_INPUT);
@@ -326,7 +328,7 @@ public class AssignmentProducer implements ViewComponentProducer, ViewParamsRepo
         UIInput acceptUntilDateField = UIInput.make(form, "accept_until:", assignment2OTP + ".acceptUntilDate");
         dateEvolver.setInvalidDateKey("assignment2.assignment_add.invalid_accept_until_date");
         dateEvolver.setInvalidTimeKey("assignment2.assignment_add.invalid_accept_until_time");
-        dateEvolver.evolveDateInput(acceptUntilDateField, (assignment.getAcceptUntilDate() != null ? assignment.getAcceptUntilDate() : defaultCloseDate));
+        dateEvolver.evolveDateInput(acceptUntilDateField, (assignment.getAcceptUntilDate() != null ? assignment.getAcceptUntilDate() : defaultAcceptUntilDate));
 
         if (!require_date){
             require_container.decorators = display_none_list;
