@@ -465,9 +465,9 @@ asnn2subview.init = function(asnnid, contextId, placementId, numSubmissions, gra
     // this is a bit of a hack to change the heading on the grade column depending
     // on the released status of the gradebook item
     if (gradesReleased == "true") {
-        jQuery("a.grade-sort").html("Grade (Released)");
+        jQuery("a.grade-sort").html("Mark (Released)");
     } else {
-        jQuery("a.grade-sort").html("Grade (Not Released)");
+        jQuery("a.grade-sort").html("Mark (Not Released)");
     }
   }
   else { 
