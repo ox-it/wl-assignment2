@@ -194,17 +194,12 @@ public class AsnnDetailsRenderer implements BasicProducer {
 
             if (resubmissionAllowed) {
                 UIMessage.make(joint, "resubmissions-allowed", "assignment2.student-submit.resubmissions_allowed");
-            }
-            else {
-                UIMessage.make(joint, "resubmissions-allowed", "assignment2.student-submit.resubmissions_not_allowed");
-            }
 
-            /*
-             * Remaining resubmissions allowed
-             */
-            if (!previewAsStudent && resubmissionAllowed) {
+                /*
+                * Remaining resubmissions allowed
+                */
                 UIOutput.make(joint, "remaining-resubmissions-row");
-                int numSubmissionsAllowed = submissionLogic.getNumberOfRemainingSubmissionsForStudent(currentUser.getId(), assignment.getId());
+                int numSubmissionsAllowed = (previewAsStudent)? assignment.getNumSubmissionsAllowed() : submissionLogic.getNumberOfRemainingSubmissionsForStudent(currentUser.getId(), assignment.getId());
                 String numAllowedDisplay;
                 if (numSubmissionsAllowed == AssignmentConstants.UNLIMITED_SUBMISSION) {
                     numAllowedDisplay = messageLocator.getMessage("assignment2.indefinite_resubmit");
@@ -213,7 +208,10 @@ public class AsnnDetailsRenderer implements BasicProducer {
                 }
                 UIOutput.make(joint, "remaining-resubmissions", numAllowedDisplay);
             }
-            
+            else {
+                UIMessage.make(joint, "resubmissions-allowed", "assignment2.student-submit.resubmissions_not_allowed");
+            }
+
             // only display the originality checking info if it is enabled for this assignment
             if (!previewAsStudent && assignment.isContentReviewEnabled() && contentReviewLogic.isContentReviewAvailable(assignment.getContextId())) { 
                 UIOutput.make(joint, "plagiarism-check-row");
