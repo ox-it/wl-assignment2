@@ -104,4 +104,12 @@ public class AssignmentActivityImpl implements TaggableActivity {
 		return site;
 	}
 
+	public String getActivityDetailUrlParams() {
+		return "";
+	}
+
+	public boolean getUseDecoration() {
+		return false;
+	}
+
 }

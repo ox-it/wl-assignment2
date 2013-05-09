@@ -2,6 +2,7 @@ package org.sakaiproject.assignment2.tool.entity;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -409,7 +410,8 @@ CoreEntityProvider, RESTful, RequestStorable, RequestAware, Statisticable {
 
         return deep.deepClone(asnn, 3, new String[] {"submissionsSet",
                 "ListOfAssociatedGroupReferences","assignmentGroupSet",
-                "attachmentSet","assignmentAttachmentRefs"});
+                "attachmentSet", "modelAnswerAttachmentSet", 
+                "assignmentAttachmentRefs"});
     }
 
     public void deleteEntity(EntityReference ref, Map<String, Object> params) {
@@ -589,10 +591,73 @@ CoreEntityProvider, RESTful, RequestStorable, RequestAware, Statisticable {
             
             gradebookItem = gradebookLogic.getGradebookItemById(contextId, Long.valueOf(gradebookItemId));
             
-            message = gradebookItem.getPointsPossible().toString();
+            if (! gradebookItem.isUngraded()) {
+                message = gradebookItem.getPointsPossible().toString();
+            }
         }
 
         return message;
+    }
+    
+    @SuppressWarnings("unchecked")
+    @EntityCustomAction(action="isPointsGradable", viewKey=EntityView.VIEW_LIST)
+    public String isPointsGradable(EntityView view, Map<String, Object> params) {
+        String contextId = null;
+        String gradebookItemId = null;
+        int gradeentrytype = 0;
+        GradebookItem gradebookItem;
+
+        String togo = String.valueOf(Boolean.FALSE);
+        
+        if (params != null && 
+            params.containsKey("contextId") && params.containsKey("gradebookItemId") &&
+            ((contextId = (String) params.get("contextId")) != null) &&
+            ((gradebookItemId = (String) params.get("gradebookItemId")) != null)) {
+            
+            contextId = contextId.trim();
+            
+            gradeentrytype = gradebookLogic.getGradebookGradeEntryType(contextId);
+            
+            gradebookItemId = gradebookItemId.trim();
+            
+            gradebookItem = gradebookLogic.getGradebookItemById(contextId, Long.valueOf(gradebookItemId));
+ 
+            if (gradeentrytype == gradebookLogic.ENTRY_BY_LETTER) {
+            // placeholder in case we want to add something here
+            } 
+            else if (gradeentrytype == gradebookLogic.ENTRY_BY_PERCENT ||
+                     gradeentrytype == gradebookLogic.ENTRY_BY_POINTS) {
+                     
+                     if (! gradebookItem.isUngraded()) {
+                         togo = String.valueOf(Boolean.TRUE);
+                     }
+            }
+        }
+
+        return togo;
+    }
+    
+    /**
+     * Custom action to allow deleting multiple assignments
+     * @param view
+     */
+    @EntityCustomAction(action = "deleteAssignments", viewKey = EntityView.VIEW_NEW)
+    public void deleteAssignments(EntityView view) {
+        String assignIds = (String) requestStorage.getStoredValue("delete-ids");
+        if (assignIds != null && !"".equals(assignIds)) {
+            assignIds = assignIds.trim();
+            if (!"".equals(assignIds)) {
+                List<String> assignIdList = Arrays.asList(assignIds.split(","));
+                for (String assignId : assignIdList) {
+                    Assignment2 asnn = assignmentLogic.getAssignmentById(new Long(assignId));
+                    assignmentLogic.deleteAssignment(asnn);
+                }
+            } else {
+                throw new IllegalArgumentException("No ids to delete (string had only whitespace).");
+            }
+        } else {
+            throw new IllegalArgumentException("No ids to delete (blank or null).");
+        }
     }
 
 }
