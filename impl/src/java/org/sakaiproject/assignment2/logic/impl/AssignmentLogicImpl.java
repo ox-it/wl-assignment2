@@ -481,10 +481,6 @@ public class AssignmentLogicImpl implements AssignmentLogic{
                 }
             }
                         
-            if (! gbItem.getTitle().equals(assignment.getTitle())) {
-                gbItem.setTitle(assignment.getTitle());
-                updateGradebook = true;
-            }
 
             if (updateGradebook) {
                 gradebookLogic.updateGbItemInGradebook(assignment.getContextId(), gbItem);
