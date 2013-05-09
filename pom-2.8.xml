@@ -35,8 +35,8 @@
     </properties>
 
     <scm>
-        <connection>scm:git:git://git-repo.oucs.ox.ac.uk/git/repos/local-version/assignment2.git</connection>
-        <developerConnection>scm:git:ssh://git-repo.oucs.ox.ac.uk/~git/repos/local-version/assignment2.git</developerConnection>
+        <connection>scm:git:https://github.com/ox-it/wl-assignment2.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:ox-it/wl-assignment2.git</developerConnection>
     </scm>
 
     <distributionManagement>
