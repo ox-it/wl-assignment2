@@ -31,11 +31,12 @@
         <sakai.announcement.group>org.sakaiproject</sakai.announcement.group>
         <sakai.message.group>org.sakaiproject</sakai.message.group>
         <sakai.assignment.group>org.sakaiproject</sakai.assignment.group>
+        <sakai.sakai-mock.version>2.8.4</sakai.sakai-mock.version>
     </properties>
 
     <scm>
-        <connection>scm:git:git://git-repo.oucs.ox.ac.uk/git/repos/local-version/assignment2.git</connection>
-        <developerConnection>scm:git:ssh://git-repo.oucs.ox.ac.uk/~git/repos/local-version/assignment2.git</developerConnection>
+        <connection>scm:git:https://github.com/ox-it/wl-assignment2.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:ox-it/wl-assignment2.git</developerConnection>
     </scm>
 
     <distributionManagement>
